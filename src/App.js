@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Child1 from "./components/Child1";
+import Child2 from "./components/Child2";
+const App = () => {
+  const [todoList, setTodoList] = useState([]);
 
-function App() {
+  const addTodo = (todo) => {
+    const TempTodoList = [...todoList];
+    TempTodoList.push(todo);
+    setTodoList(TempTodoList);
+  };
+  
+  const deleteTodo = (index) => {
+    const tempTodoList = [...todoList];
+    tempTodoList.splice(index, 1);
+    setTodoList(tempTodoList);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>부모</h1>
+      <hr />
+      <Child1 setData={addTodo} />
+      <Child2 data={todoList} deleteData={deleteTodo} />
     </div>
   );
-}
+};
 
 export default App;
